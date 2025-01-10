@@ -1,0 +1,7 @@
+services:
+  video-converter:
+    build:
+      context: .
+      dockerfile: Dockerfile.ffmpeg
+    volumes:
+      - .:/videos

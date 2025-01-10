@@ -1,0 +1,13 @@
+FROM jrottenberg/ffmpeg:latest
+
+WORKDIR /videos
+
+# Install bash
+RUN apt-get update && apt-get install -y bash
+
+COPY convert.sh /usr/local/bin/convert.sh
+RUN chmod +x /usr/local/bin/convert.sh
+
+# Explicitly set the shell to bash
+SHELL ["/bin/bash", "-c"]
+ENTRYPOINT ["/bin/bash", "/usr/local/bin/convert.sh"]
