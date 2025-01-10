@@ -11,14 +11,12 @@ A Docker-based tool that automatically converts videos into multiple resolution 
 
 ## Project Structure
 
-```
 .
 ├── README.md
 ├── convert.sh              # FFmpeg conversion script (runs inside Docker)
 ├── convert_video.sh        # Main script to handle Docker operations
 ├── docker-compose.yml      # Docker Compose configuration
 └── Dockerfile.ffmpeg       # Dockerfile for FFmpeg environment
-```
 
 ## Installation
 
@@ -41,7 +39,7 @@ A Docker-based tool that automatically converts videos into multiple resolution 
 
 Run the conversion script with your input video file:
 ```bash
-./convert_video.sh path/to/your/video.mp4
+./convert_video.sh videos/input.mp4
 ```
 
 The script will:
@@ -121,7 +119,6 @@ If you encounter issues:
 ## License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
-```
 
 Key updates made:
 1. Improved overall structure and readability
