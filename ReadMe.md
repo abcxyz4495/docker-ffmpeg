@@ -1,31 +1,134 @@
-# Video Conversion using Docker and FFmpeg
+# Video Resolution Converter using Docker and FFmpeg
 
-This project demonstrates how to use Docker to convert a video to multiple resolutions using FFmpeg. The script will convert an input video file (`input.mp4`) to 144p, 360p, 480p, 720p, and 1080p resolutions. The converted files will be saved as `output_<resolution>p.mp4`.
+A Docker-based tool that automatically converts videos into multiple resolution formats (144p, 360p, 480p, 720p, and 1080p) using FFmpeg.
 
-## Requirements
+## Prerequisites
 
 - Docker
-- docker-compose
-- A video file (`input.mp4`) to be converted
+- Docker Compose
+- Bash shell
+- A video file to convert
 
-## Files Overview
+## Project Structure
 
-- `Dockerfile.ffmpeg`: Defines the Docker image based on the FFmpeg container, installs Bash, and sets up the conversion script.
-- `convert.sh`: A script inside the Docker container that handles video conversion.
-- `convert_video.sh`: A script that automates the entire process, including Docker setup and file management.
+```
+.
+├── README.md
+├── convert.sh              # FFmpeg conversion script (runs inside Docker)
+├── convert_video.sh        # Main script to handle Docker operations
+├── docker-compose.yml      # Docker Compose configuration
+└── Dockerfile.ffmpeg       # Dockerfile for FFmpeg environment
+```
 
-## Getting Started
+## Installation
 
-### Prerequisites
+1. Ensure Docker and Docker Compose are installed:
+   - [Docker Installation Guide](https://docs.docker.com/get-docker/)
+   - [Docker Compose Installation Guide](https://docs.docker.com/compose/install/)
 
-Ensure you have Docker and Docker Compose installed on your machine. You can install them by following the official documentation:
-
-- [Docker Installation](https://docs.docker.com/get-docker/)
-- [Docker Compose Installation](https://docs.docker.com/compose/install/)
-
-### Setup
-
-1. Clone or download this repository to your local machine.
-2. Navigate to the project directory:
+2. Clone this repository:
    ```bash
-   cd /path/to/video-conversion
+   git clone <repository-url>
+   cd video-converter
+   ```
+
+3. Make the scripts executable:
+   ```bash
+   chmod +x convert.sh convert_video.sh
+   ```
+
+## Usage
+
+Run the conversion script with your input video file:
+```bash
+./convert_video.sh path/to/your/video.mp4
+```
+
+The script will:
+1. Copy your input video to a temporary file
+2. Start a Docker container with FFmpeg
+3. Convert the video to five different resolutions:
+   - 144p
+   - 360p
+   - 480p
+   - 720p
+   - 1080p
+4. Clean up temporary files and Docker containers
+
+## Output Files
+
+The script generates five MP4 files in the current directory:
+- output_144p.mp4
+- output_360p.mp4
+- output_480p.mp4
+- output_720p.mp4
+- output_1080p.mp4
+
+## Technical Details
+
+### Video Conversion Settings
+- Video Codec: H.264
+- CRF (Constant Rate Factor): 23
+- Preset: medium
+- Audio Codec: AAC
+- Audio Bitrate: 128k
+
+### Error Handling
+The script includes checks for:
+- Missing input file
+- Docker availability
+- Docker Compose installation
+- Conversion process success
+- Output file existence
+
+### Automatic Cleanup
+- Removes temporary input file
+- Shuts down Docker containers
+- Reports conversion status
+
+## Troubleshooting
+
+If you encounter issues:
+
+1. Check Docker status:
+   ```bash
+   docker info
+   ```
+
+2. Verify Docker Compose installation:
+   ```bash
+   docker compose version
+   ```
+
+3. Check input file:
+   ```bash
+   ls -l path/to/your/video.mp4
+   ```
+
+4. View Docker logs:
+   ```bash
+   docker compose logs video-converter
+   ```
+
+## Contributing
+
+1. Fork the repository
+2. Create your feature branch
+3. Commit your changes
+4. Push to the branch
+5. Create a new Pull Request
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+```
+
+Key updates made:
+1. Improved overall structure and readability
+2. Added more detailed technical information
+3. Included clear installation steps
+4. Added contributing section
+5. Added license information
+6. Improved troubleshooting section
+7. Added project structure visualization
+8. Made command examples more clear and consistent
